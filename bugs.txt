@@ -1,0 +1,33 @@
+1. Title: Crash on immediate exit with +synctex
+   Severity: Low
+   Detailed report: If one exits gvim immediately after startup, it induces
+                    a crash.
+   Reason: Tries to remove .synctex.gz file which may not exit in case on
+           compilation happened.
+
+2. Title: Compilation error causes an exception in exception.
+   Severity: High
+   Detailed report: Exception throws a string-exception concatnation error.
+   Reason:
+
+3. Title: All files need not be removed at every compilation
+   Severity: Low
+   Detailed report: Specially with +synctex it is unnecessary to remove all
+                    files at every compilation. We should be able to choose
+					what to remove when.
+   Reason:
+
+4. Title: Occasional 2 gvims with +synctex
+   Severity: Medium
+   Detailed report: Due to delay in starting up the server, sometimes two
+                    gvims start up. 
+   Reason: This is an operating system based delayed. Maybe a better idea
+		   would be to check if the server is up before sending commands to
+		   it.
+
+5. Title: Multiple -synctex=1 switches 
+   Severity: Low
+   Detailed report: the latex switches array seems to accumulate -synctex=1
+                    switch.
+   Reason: Possible we are setting it at each run. Need to find exact
+           reason.

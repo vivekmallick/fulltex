@@ -1,0 +1,5 @@
+fulltex version 1.1
+
+This is a LaTeX compilation suite. Basically it automatically deduces the
+sequence of commands to run for a complete compilation of a latex document.
+It provides fine grained control over the sequence if one needs it.
