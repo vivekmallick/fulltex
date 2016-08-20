@@ -50,12 +50,17 @@ def need_makeindex (texfile) :
 def need_rerun (texfile) :
     """Check whether we should rerun latex. This returns a boolean."""
 
-    rerun_str = "LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right."
+    rerun_str1 = "LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right."
+    rerun_str2_1="(natbib)"
+    rerun_str2_2="Rerun to get citations correct."
     logfile = log_file(texfile)
 
-    test1 = search_str_in_file(logfile, rerun_str)
+    test1 = search_str_in_file(logfile, rerun_str1)
+    test2_1 = search_str_in_file(logfile, rerun_str2_1)
+    test2_2 = search_str_in_file(logfile, rerun_str2_2)
+    test2 = test2_1 and test2_2
 
-    if test1 :
+    if test1 or test2:
         rval = True
     else :
         rval = False
