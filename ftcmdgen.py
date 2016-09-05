@@ -54,7 +54,7 @@ def need_rerun (texfile) :
     rerun_str2_1 = "(natbib)"
     rerun_str2_2 = "Rerun to get citations correct."
     rerun_str_toc1 = "No file"
-    rerun str_toc2 = ".toc"
+    rerun_str_toc2 = ".toc"
     logfile = log_file(texfile)
 
     test1 = search_str_in_file(logfile, rerun_str1)
