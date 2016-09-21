@@ -39,13 +39,14 @@ def need_bibtex (texfile) :
 def need_makeindex (texfile) :
     """Check whether we need to run makeindex"""
     idxfile = idx_file(texfile)
-    packidx = '\\usepackage{makeidx}'
+    # packidx = '\\usepackage{makeidx}'
 
-    test1 = search_str_in_file(texfile, packidx)
+    # test1 = search_str_in_file(texfile, packidx)
     test2 = os.path.isfile(idxfile)
     test3 = search_str_in_file(texfile, '\\makeindex')
 
-    return (test1 and test2 and test3)
+    # Removed test1 as latest versions of latex has makeindex built into it
+    return (test2 and test3)
 
 def need_rerun (texfile) :
     """Check whether we should rerun latex. This returns a boolean."""
