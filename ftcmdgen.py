@@ -9,6 +9,7 @@ import re
 # Import local py files
 from ftbasiccmd import *
 from fterrhand import *
+from ftcleanup import *
 
 #############################################################################
 # Functions involved in deciding which commands to run
@@ -25,16 +26,31 @@ def search_str_in_file (flname, str) :
         raise FullTexFileProcError(flname)
     return found
 
+def search_str_in_includes (texfile, str) :
+    """This is to find a string by scanning through all included files."""
+    texlist = files(texfile)
+    found_str = False
+    for flname in texlist :
+        print "Scanning " + flname + ". found_str: ",
+        found_str = found_str or (search_str_in_file(flname + '.tex', str))
+        print found_str
+    return found_str
+
 def need_bibtex (texfile) :
     """Checks whether we need to run bibtex"""
     auxfile = aux_file(texfile)
     str_in_aux_fl = '\\bibdata'
     str_in_tex_fl = '\\bibliography{'
+    # We need to scan for cite and nocite in all the 'include'd and 'input'd
+    # files. We should make another function for that.
 
     test1 = search_str_in_file(auxfile, str_in_aux_fl)
     test2 = search_str_in_file(texfile, str_in_tex_fl)
+    testcite = search_str_in_includes (texfile, '\\cite')
+    testnocite = search_str_in_includes (texfile, '\\nocite')
+    testcitation = testcite or testnocite
     
-    return (test1 and test2)
+    return (test1 and test2 and testcitation)
 
 def need_makeindex (texfile) :
     """Check whether we need to run makeindex"""

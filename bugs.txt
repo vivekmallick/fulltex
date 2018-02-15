@@ -31,3 +31,10 @@
                     switch.
    Reason: Possible we are setting it at each run. Need to find exact
            reason.
+
+6. Title: bibtex=auto causes crash
+   Severity: Fixed
+   Detailed report: Sometimes fulltex tries to run bibtex even when it is
+                    not necessary.
+   Reason: the auto-reckoning if bibtex should run gives false
+                    positives when latex cite command is not issued.
