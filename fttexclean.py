@@ -124,8 +124,8 @@ class UserOptions :
     def needHelp(self) :
         return self.needsHelp
 
-    def enable_synctex(self) :
-        self.latexswitches.append('-synctex=1')
+    # def enable_synctex(self) :
+        # self.latexswitches.append('-synctex=1')
 
 
 #########################################################################
@@ -142,8 +142,10 @@ def compile_tex (texfile, userOpt, width=70 , maxTries=6) :
     
     # Set local variables depending on userOpt
     if userOpt.user_opt('synctex'):
+        print "latex with synctex"
         ltxCmdOpts = userOpt.user_opt('latexswitches').append('-synctex=1')
     else:
+        print "latex without synctex"
         ltxCmdOpts = userOpt.user_opt('latexswitches')
     bibOpt = userOpt.user_opt('bibtex')
     indexOpt = userOpt.user_opt('makeindex')
