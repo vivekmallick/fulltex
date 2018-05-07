@@ -141,19 +141,19 @@ def compile_tex (texfile, userOpt, width=70 , maxTries=6) :
     to be sent to the latex command."""
     
     # Set local variables depending on userOpt
-    if userOpt.user_opt('synctex'):
-        print "latex with synctex"
-        ltxCmdOpts = userOpt.user_opt('latexswitches').append('-synctex=1')
-    else:
-        print "latex without synctex"
-        ltxCmdOpts = userOpt.user_opt('latexswitches')
+    ltxCmdOpts = userOpt.user_opt('latexswitches')
     bibOpt = userOpt.user_opt('bibtex')
     indexOpt = userOpt.user_opt('makeindex')
     outputtype = userOpt.user_opt('output')
 
 
     runAgain = False
-    run_cmd(generate_tex_cmd(outputtype, texfile, ltxCmdOpts))
+    if userOpt.user_opt('synctex') :
+        newLtxCmdOpts = ltxCmdOpts + ['-synctex=1']
+    else :
+        newLtxCmdOpts = ltxCmdOpts
+    run_cmd(generate_tex_cmd(outputtype, texfile, newLtxCmdOpts))
+
     separate(width)
 
     runAgain = need_rerun(texfile)
@@ -170,7 +170,7 @@ def compile_tex (texfile, userOpt, width=70 , maxTries=6) :
 
     n = maxTries
     while (runAgain and n > 0) :
-        run_cmd(generate_tex_cmd(outputtype, texfile, ltxCmdOpts))
+        run_cmd(generate_tex_cmd(outputtype, texfile, newLtxCmdOpts))
         n = n - 1
         separate(width)
         runAgain = need_rerun(texfile)
