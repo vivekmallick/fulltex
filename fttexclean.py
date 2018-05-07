@@ -141,7 +141,10 @@ def compile_tex (texfile, userOpt, width=70 , maxTries=6) :
     to be sent to the latex command."""
     
     # Set local variables depending on userOpt
-    ltxCmdOpts = userOpt.user_opt('latexswitches')
+    if userOpt.user_opt('synctex'):
+        ltxCmdOpts = userOpt.user_opt('latexswitches').append('-synctex=1')
+    else:
+        ltxCmdOpts = userOpt.user_opt('latexswitches')
     bibOpt = userOpt.user_opt('bibtex')
     indexOpt = userOpt.user_opt('makeindex')
     outputtype = userOpt.user_opt('output')

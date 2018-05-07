@@ -89,7 +89,7 @@ def run_with_synctex(userTags, texfile) :
         if os.path.isfile('triggertex'):
             try :
                 # Run with synctex
-                userTags.enable_synctex()
+                # userTags.enable_synctex()
                 tex_and_clean(userTags, helpfilename="./help.txt")
             except Exception:
                 print "Compilation failed"
