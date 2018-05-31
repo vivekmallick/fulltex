@@ -202,7 +202,7 @@ def tex_and_clean(userTags, helpfilename='/home/vmallick/.fulltex/help.txt') :
             for texfile in userTags.user_opt('texfilename') :
                 print "Process " + texfile
                 compile_tex(texfile, userTags)
-                delete_files(texfile)
+                delete_files_w_opts(texfile, userTags)
 
 # Main code
 if __name__ == "__main__" :

@@ -1,5 +1,5 @@
 1. Title: Crash on immediate exit with +synctex
-   Severity: Low
+   Severity: Fixed
    Detailed report: If one exits gvim immediately after startup, it induces
                     a crash.
    Reason: Tries to remove .synctex.gz file which may not exit in case on
@@ -14,19 +14,20 @@
    Severity: Low
    Detailed report: Specially with +synctex it is unnecessary to remove all
                     files at every compilation. We should be able to choose
-					what to remove when.
-   Reason:
+					what to remove when. This has been partially fixed.
+   Reason: It detects rm option Default and doesn't delete if synctex flag
+           is set.
 
 4. Title: Occasional 2 gvims with +synctex
-   Severity: Medium
+   Severity: Low
    Detailed report: Due to delay in starting up the server, sometimes two
                     gvims start up. 
    Reason: This is an operating system based delayed. Maybe a better idea
 		   would be to check if the server is up before sending commands to
-		   it.
+		   it. Partial fix by setting a two second delay.
 
 5. Title: Multiple -synctex=1 switches 
-   Severity: Low
+   Severity: Fixed.
    Detailed report: the latex switches array seems to accumulate -synctex=1
                     switch.
    Reason: Possible we are setting it at each run. Need to find exact
@@ -37,4 +38,4 @@
    Detailed report: Sometimes fulltex tries to run bibtex even when it is
                     not necessary.
    Reason: the auto-reckoning if bibtex should run gives false
-                    positives when latex cite command is not issued.
+           positives when latex cite command is not issued.

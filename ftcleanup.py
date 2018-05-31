@@ -81,4 +81,9 @@ def delete_files (texfile, others=[], width=70) :
             print
         print "-" * width
 
-
+def delete_files_w_opts(texfile, userOpt, others=[], width=70) :
+    run_del = True
+    run_del = run_del and (userOpt.user_opt('rm') == "Default")
+    run_del = run_del and (not (userOpt.user_opt('synctex')))
+    if run_del :
+        delete_files(texfile, others, width)

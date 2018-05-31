@@ -39,6 +39,7 @@ def launch_gvim(gvim_cmd_file, gvimservername, texfilename) :
 
     try:
         run_cmd(gvim_cmd)
+        time.sleep(2)
         run_cmd(gvim_openfile_cmd)
         time.sleep(10)
         # run_cmd(gvim_set_dir) This does not work
@@ -97,7 +98,7 @@ def run_with_synctex(userTags, texfile) :
             os.remove('triggertex')
         time.sleep(5)
     os.remove(gvim_cmd_file)
-    os.remove(synctex_file(texfile))
+    # os.remove(synctex_file(texfile))
 
 
 # The following is for testing.
